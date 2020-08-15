@@ -11,7 +11,7 @@ import XCTest
 @testable import BTree
 
 extension BTree {
-    func assertValid(file: StaticString = #file, line: UInt = #line) {
+    func assertValid(file: StaticString = #filePath, line: UInt = #line) {
         root.assertValid(file: file, line: line)
     }
 
@@ -21,7 +21,7 @@ extension BTree {
 }
 
 extension BTreeNode {
-    func assertValid(file: StaticString = #file, line: UInt = #line) {
+    func assertValid(file: StaticString = #filePath, line: UInt = #line) {
         func testNode(level: Int, node: BTreeNode<Key, Value>, minKey: Key?, maxKey: Key?) -> (count: Int, defects: [String]) {
             var defects: [String] = []
 
@@ -361,8 +361,8 @@ struct DictionaryBag<Element: Hashable>: Collection {
 
 struct Ref<Target: AnyObject>: Hashable {
     let target: Target
-    var hashValue: Int {
-        return ObjectIdentifier(target).hashValue
+    func hash(into hasher: inout Hasher) {
+        ObjectIdentifier(target).hash(into: &hasher)
     }
     static func ==(left: Ref, right: Ref) -> Bool {
         return left.target === right.target

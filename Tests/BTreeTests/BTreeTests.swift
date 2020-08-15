@@ -1169,7 +1169,7 @@ class BTreeTests: XCTestCase {
     }
 
     func testSequenceConversion() {
-        func check(_ range: CountableRange<Int>, file: StaticString = #file, line: UInt = #line) {
+        func check(_ range: CountableRange<Int>, file: StaticString = #filePath, line: UInt = #line) {
             let order = 5
             let sequence = range.map { ($0, String($0)) }
             let tree = Tree(sortedElements: sequence, order: order)
@@ -1192,7 +1192,7 @@ class BTreeTests: XCTestCase {
     }
 
     func testSequenceConversionToMaximalTrees() {
-        func check(depth: Int, file: StaticString = #file, line: UInt = #line) {
+        func check(depth: Int, file: StaticString = #filePath, line: UInt = #line) {
             let order = 5
             let keysPerNode = order - 1
             var count = keysPerNode
